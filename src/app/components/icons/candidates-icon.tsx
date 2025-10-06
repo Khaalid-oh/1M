@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 interface CandidatesIconProps extends React.SVGProps<SVGSVGElement> {
   isActive?: boolean;
 }
@@ -12,7 +12,7 @@ const CandidatesIcon = (props: CandidatesIconProps) => (
     {...props}
   >
     <path
-      stroke={props.isActive ? "#7B8794" : "#0B6CF4"}
+      stroke={props.isActive ? "#0B6CF4" : "#7B8794"}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}
@@ -20,4 +20,4 @@ const CandidatesIcon = (props: CandidatesIconProps) => (
     />
   </svg>
 );
-export default CandidatesIcon
+export default CandidatesIcon;

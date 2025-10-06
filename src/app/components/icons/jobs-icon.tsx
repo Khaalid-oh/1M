@@ -11,7 +11,7 @@ const JobsIcon = (props: JobsIconProps) => (
     {...props}
   >
     <path
-      stroke={props.isActive ? "#7B8794" : "#0B6CF4"}
+      stroke={props.isActive ? "#0B6CF4" : "#7B8794"}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}
@@ -19,7 +19,7 @@ const JobsIcon = (props: JobsIconProps) => (
       clipRule="evenodd"
     />
     <path
-      stroke={props.isActive ? "#7B8794" : "#0B6CF4"}
+      stroke={props.isActive ? "#0B6CF4" : "#7B8794"}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}
