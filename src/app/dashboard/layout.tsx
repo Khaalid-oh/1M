@@ -1,4 +1,4 @@
-import "../globals.css";
+import Sidebar from "../components/sidebar/page";
 
 export default function DashboardLayout({
   children,
@@ -6,8 +6,9 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
+    <div className="flex">
+      <Sidebar />
+      <div className="flex-1">{children}</div>
+    </div>
   );
 }
