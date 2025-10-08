@@ -1,5 +1,10 @@
 import * as React from "react";
-const ReferralIcon = (props: React.SVGProps<SVGSVGElement>) => (
+
+interface ReferralIconProps extends React.SVGProps<SVGSVGElement> {
+  isActive?: boolean;
+}
+
+const ReferralIcon = (props: ReferralIconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -8,7 +13,7 @@ const ReferralIcon = (props: React.SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="#7B8794"
+      stroke={props.isActive ? "#0B6CF4" : "#7B8794"}
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}

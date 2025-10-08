@@ -69,24 +69,45 @@ function Sidebar() {
     {
       name: "Dashboard",
       href: "/dashboard",
-      icon: <DashboardIcon />,
+      icon: <DashboardIcon isActive={pathname === "/dashboard"} />,
     },
     {
       name: "Jobs",
       href: "/dashboard/jobs",
-      icon: <JobsIcon />,
+      icon: (
+        <JobsIcon
+          isActive={
+            pathname === "/dashboard/jobs" ||
+            pathname?.startsWith("/dashboard/jobs/")
+          }
+        />
+      ),
       count: metrics.jobs,
     },
     {
-      name: "Refferals",
-      href: "/dashboard/refferals",
-      icon: <ReferralIcon />,
+      name: "Referrals",
+      href: "/dashboard/referrals",
+      icon: (
+        <ReferralIcon
+          isActive={
+            pathname === "/dashboard/referrals" ||
+            pathname?.startsWith("/dashboard/referrals/")
+          }
+        />
+      ),
       count: metrics.performance,
     },
     {
       name: "Candidates",
       href: "/dashboard/candidates",
-      icon: <CandidatesIcon />,
+      icon: (
+        <CandidatesIcon
+          isActive={
+            pathname === "/dashboard/candidates" ||
+            pathname?.startsWith("/dashboard/candidates/")
+          }
+        />
+      ),
       count: metrics.performance,
     },
   ];
@@ -138,7 +159,13 @@ function Sidebar() {
                 }`}
             >
               <div className="flex items-center gap-3">
-                {item.icon}
+                {React.isValidElement(item.icon)
+                  ? item.icon
+                  : React.createElement(item?.icon as any, {
+                      isActive:
+                        pathname === item.href ||
+                        pathname?.startsWith(item.href + "/"),
+                    })}
                 <span>{item.name}</span>
               </div>
               {typeof item.count === "number" && (
