@@ -152,8 +152,7 @@ function Sidebar() {
               href={item.href}
               className={`flex items-center justify-between px-3 py-2 text-sm rounded-lg group
                 ${
-                  pathname === item.href ||
-                  pathname?.startsWith(item.href + "/")
+                  pathname === item.href
                     ? "bg-blue-50 text-blue-600"
                     : "hover:bg-gray-50 hover:text-gray-600"
                 }`}

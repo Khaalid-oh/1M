@@ -9,6 +9,7 @@ import { Plus } from "lucide-react";
 import JobCardComponent from "../../components/ui/JobCardComponent";
 import { mockJobs } from "../../mocks/jobData";
 import JobFilter from "../../components/ui/JobFilter";
+import { useRouter } from "next/navigation";
 
 interface Job {
   id: string;
@@ -136,6 +137,8 @@ export default function JobsPage() {
     }
   };
 
+  const router = useRouter();
+
   return (
     <div className="flex gap-8 w-full h-screen p-8 overflow-y-auto">
       <div className="flex-1">
@@ -147,7 +150,11 @@ export default function JobsPage() {
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="secondary" icon={JoblinkIcon}>
+            <Button
+              variant="secondary"
+              icon={JoblinkIcon}
+              onClick={() => router.push("/job-feed")}
+            >
               View My Job Feed
             </Button>
             <Button variant="primary" icon={Plus}>
@@ -189,7 +196,7 @@ export default function JobsPage() {
               ))}
             </div>
           </div>
-          <div className="absolute top-0 -right-3">
+          <div className="absolute top-0 md:-right-3 xl:right-0">
             <JobFilter onFilterChange={handleFilterChange} />
           </div>
         </div>
