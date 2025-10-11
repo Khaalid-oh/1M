@@ -9,6 +9,7 @@ import { Plus } from "lucide-react";
 import JobCardComponent from "../../components/ui/JobCardComponent";
 import { mockJobs } from "../../mocks/jobData";
 import JobFilter from "../../components/ui/JobFilter";
+import PostJobModal from "../../components/ui/PostJobModal";
 import { useRouter } from "next/navigation";
 
 interface Job {
@@ -54,6 +55,7 @@ export default function JobsPage() {
     industry: [],
     workLocation: [],
   });
+  const [isPostJobModalOpen, setIsPostJobModalOpen] = useState(false);
 
   const handleViewToggle = (view: "circle" | "external") => {
     setCurrentView(view);
@@ -137,6 +139,13 @@ export default function JobsPage() {
     }
   };
 
+  const handlePostJob = (jobData: any) => {
+    console.log("Posting new job:", jobData);
+    // Here you would typically make an API call to post the job
+    // For now, we'll just log the data
+    // You can add the new job to your jobs state here
+  };
+
   const router = useRouter();
 
   return (
@@ -157,7 +166,11 @@ export default function JobsPage() {
             >
               View My Job Feed
             </Button>
-            <Button variant="primary" icon={Plus}>
+            <Button
+              variant="primary"
+              icon={Plus}
+              onClick={() => setIsPostJobModalOpen(true)}
+            >
               Post a Job
             </Button>
           </div>
@@ -200,6 +213,13 @@ export default function JobsPage() {
             <JobFilter onFilterChange={handleFilterChange} />
           </div>
         </div>
+
+        {/* Post Job Modal */}
+        <PostJobModal
+          isOpen={isPostJobModalOpen}
+          onClose={() => setIsPostJobModalOpen(false)}
+          onSubmit={handlePostJob}
+        />
       </div>
     </div>
   );
