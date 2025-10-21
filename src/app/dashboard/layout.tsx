@@ -12,7 +12,7 @@ export default function DashboardLayout({
     <div className="flex">
       <Sidebar />
       <div className="flex-1">
-        <div className="w-full items-center justify-end flex h-20 gap-6 text-sm pr-12">
+        {/* <div className="w-full items-center justify-end flex h-20 gap-6 text-sm pr-12">
           <button
             onClick={() => router.push("/join-as-a-partner")}
             className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-md cursor-pointer"
@@ -20,7 +20,7 @@ export default function DashboardLayout({
             Join as a partner
           </button>
           <button>Support</button>
-        </div>
+        </div> */}
         {children}
       </div>
     </div>
