@@ -5,6 +5,8 @@ import Button from "../../components/buttons/button";
 import { Plus, Copy, Users, MousePointer, Coins, Gift } from "lucide-react";
 import { mockDashboardData } from "../../mocks/dashboardData";
 import Toast from "../../components/ui/Toast";
+import InviteTalentModal from "../../components/ui/InviteTalentModal";
+import InviteCandidateModal from "../../components/ui/InviteCandidateModal";
 import Image from "next/image";
 import CandidatesIcon from "@/app/components/icons/candidates-icon";
 import ClickIcon from "@/app/components/icons/click-icon";
@@ -25,6 +27,12 @@ interface ToastState {
   type: "success" | "error" | "info";
 }
 
+interface CandidateFormData {
+  fullName: string;
+  email: string;
+  selectedJob: string;
+}
+
 const ReferralPage = () => {
   const [activeTab, setActiveTab] = useState("talent");
   const [referralLink] = useState("https://tech1m.ai/ref/Vmh54r46");
@@ -33,6 +41,8 @@ const ReferralPage = () => {
     message: "",
     type: "success",
   });
+  const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
+  const [isCandidateModalOpen, setIsCandidateModalOpen] = useState(false);
   const referralCode = "TECH1M-CODE-123456";
 
   const referralActivities: ReferralActivity[] = [
@@ -104,12 +114,45 @@ const ReferralPage = () => {
     setToast((prev) => ({ ...prev, show: false }));
   };
 
+  const handleInviteNext = (inviteType: "job" | "tech1m") => {
+    // Close the first modal and open the candidate modal
+    setIsInviteModalOpen(false);
+    setIsCandidateModalOpen(true);
+  };
+
+  const handleCandidateShare = (candidateData: CandidateFormData) => {
+    // Handle sharing the candidate invitation
+    console.log("Sharing candidate:", candidateData);
+    setIsCandidateModalOpen(false);
+
+    // Show success toast
+    setToast({
+      show: true,
+      message: "Candidate invitation sent successfully!",
+      type: "success",
+    });
+  };
+
   return (
     <div className="p-8 bg-gray-50 min-h-screen">
       {/* Toast Notification */}
       {toast.show && (
         <Toast message={toast.message} type={toast.type} onClose={closeToast} />
       )}
+
+      {/* Invite Talent Modal */}
+      <InviteTalentModal
+        isOpen={isInviteModalOpen}
+        onClose={() => setIsInviteModalOpen(false)}
+        onNext={handleInviteNext}
+      />
+
+      {/* Invite Candidate Modal */}
+      <InviteCandidateModal
+        isOpen={isCandidateModalOpen}
+        onClose={() => setIsCandidateModalOpen(false)}
+        onShare={handleCandidateShare}
+      />
 
       {/* Header Section */}
       <div className="mb-6">
@@ -122,7 +165,13 @@ const ReferralPage = () => {
               Welcome to your circle, manage your circle details here.
             </p>
           </div>
-          <Button variant="primary" size="md" icon={Plus} iconPosition="left">
+          <Button
+            variant="primary"
+            size="md"
+            icon={Plus}
+            iconPosition="left"
+            onClick={() => setIsInviteModalOpen(true)}
+          >
             Invite to Tech1M
           </Button>
         </div>
@@ -145,6 +194,11 @@ const ReferralPage = () => {
           width={240}
           height={240}
           className="absolute right-0 bottom-0"
+          quality={100}
+          priority={true}
+          unoptimized={true}
+          loading="eager"
+          fetchPriority="high"
         />
       </div>
 
